@@ -1,4 +1,4 @@
-import React from 'react'
+import Wrapper from './components/Wrapper';
 
  function App() {
   return (
@@ -6,7 +6,7 @@ import React from 'react'
       <Wrapper><h1>App</h1></Wrapper>
       
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

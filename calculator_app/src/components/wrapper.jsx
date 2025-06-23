@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 const Wrapper = ({children}) => {
   return (
@@ -8,4 +8,4 @@ const Wrapper = ({children}) => {
   )
 }
 
-export default wrapper
+export default Wrapper;
