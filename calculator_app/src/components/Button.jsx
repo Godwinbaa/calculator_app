@@ -13,22 +13,55 @@ const getStyleName = btn =>{
 
 
 const Button = ({value}) => {
-    const{setCalc} = useContext(CalcContext)
+    const{calc, setCalc} = useContext(CalcContext);
 //user cllick comma
     const commaClick = () =>{
-        console.log(setCalc);
+        setCalc({
+            ...calc,
+            num : !calc.num.toString().includes('.') ? calc.num + value: calc.num
+        })
         
         
     }
+    const resetclick = () =>{
+        setCalc({
+            sign: '',num : 0, res : 0
+        }) 
+    }
+    const handleClickButton = () =>{
+        const numberString = value.toString()
+
+        let numberValue;
+        if (numberString ==='0' && calc.num === 0){
+            numberValue ="0"
+        }else{
+            numberValue = Number(calc.num + numberString)
+        
+        }
+            setCalc({
+                ...calc,
+                num: numberValue
+
+
+            })
+    }
+
+
+
 
 
     const handleBtnClick = () =>{
         
         const result ={
-            '.': commaClick
+            '.': commaClick,
+            'C': resetclick
         }
-        return result[value]();
+        if (result[value]){
+            return result[value]()
 
+        }else {
+            return handleClickButton()
+        }
     }
 
 
