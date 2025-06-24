@@ -45,19 +45,70 @@ const Button = ({value}) => {
 
             })
     }
+////////////click operator
+    const signclick = () =>{
+        setCalc({
+            sign: value,
+            res: !calc.res && calc.num ? calc.num : calc.res,
+            num: 0
+        })
+    }
+///equil click
+     const equalsclick = () =>{
+        if(calc.res && calc.num ){
+               const math =(a, b, sign) =>{
+            const result = {
+                '+': (a, b) => a + b,
+                '-': (a, b) => a - b,
+                'X': (a, b) => a * b,
+                '/': (a, b) => a / b,
+            };
+            return result[sign](a,b);
+        };
+        setCalc({
+            res : math(calc.res, calc.num, calc.sign),
+            sign: '',
+            num: 0
 
-                        godwin
+        })
+    }
+     }
+//% click 
+     const percentClick = () =>{
+        setCalc({
+            num:(calc.num /100),
+            res: (calc.res / 100),
+            sign:''
+
+        })
+     }
+// -
+     const invertClick = () =>{
+        setCalc({
+            num: calc.num ? calc.num * -1: 0,
+            res: calc.res ? calc.res * -1: 0,
+            sign: ''
+        })
+
+     }
 
 
 
     const handleBtnClick = () =>{
         
-        const result ={
+        const results ={
             '.': commaClick,
-            'C': resetclick
+            'C': resetclick,
+            '/': signclick,
+            'X': signclick,
+            '-': signclick,
+            '+': signclick,
+            '=': equalsclick,
+            '%': percentClick,
+            '+-':invertClick
         }
-        if (result[value]){
-            return result[value]()
+        if (results[value]){
+            return results[value]()
 
         }else {
             return handleClickButton()
